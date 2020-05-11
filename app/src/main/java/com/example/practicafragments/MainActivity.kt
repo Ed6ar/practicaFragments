@@ -7,24 +7,22 @@ import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.View
 import android.widget.EditText
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.models.User
+import com.example.models.UserViewModel
 import com.example.myfragments.myOwnFragment
 import com.example.practicafragments.databinding.ActivityMainBinding
+import java.util.Optional.of
+
 
 class MainActivity : AppCompatActivity() {
 
+    //var viewModel: ViewModel = ViewModelProvider.of(this).get(UserViewModel.class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-
-        //Add a fragment to this view
-        val myOwnFragment = myOwnFragment()
-        fragmentTransaction.add(R.id.fragment_container, myOwnFragment)
-        fragmentTransaction.commit()
+        //setContentView(R.layout.activity_main)
 
         // ActivityMainBinding is the name of activity_main.xml
         //the compiler gif us that name to user DataBinding.
@@ -34,6 +32,16 @@ class MainActivity : AppCompatActivity() {
         )
         //Now we'll initialice the binding
         binding.user = User("Edgar", "Elizarraras", "DF")
+
+
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        //Add a fragment to this view
+        val myOwnFragment = myOwnFragment()
+        fragmentTransaction.add(R.id.fragment_container, myOwnFragment)
+        fragmentTransaction.commit()
+
 
     }
 
