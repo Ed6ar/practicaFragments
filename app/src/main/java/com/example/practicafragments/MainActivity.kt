@@ -7,19 +7,19 @@ import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.View
 import android.widget.EditText
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.databinding.Observable
+import androidx.lifecycle.*
+import com.example.models.MyViewModel
 import com.example.models.User
-import com.example.models.UserViewModel
 import com.example.myfragments.myOwnFragment
 import com.example.practicafragments.databinding.ActivityMainBinding
-import java.util.Optional.of
+
 
 
 class MainActivity : AppCompatActivity() {
 
-    //var viewModel: ViewModel = ViewModelProvider.of(this).get(UserViewModel.class)
+    private lateinit var myViewModel: MyViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
@@ -42,6 +42,14 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.add(R.id.fragment_container, myOwnFragment)
         fragmentTransaction.commit()
 
+        //
+        myViewModel = ViewModelProviders.of(this).get(MyViewModel::class.java)
+
+        val userNameWithLiveData = Observer<String> { userName ->
+            binding.user!!.Name = userName.toString()
+        }
+
+        myViewModel.userName.observe(this, userNameWithLiveData)
 
     }
 
@@ -54,5 +62,4 @@ class MainActivity : AppCompatActivity() {
         }
         startActivity(intent)
     }
-    fun setName(view: View){}
 }

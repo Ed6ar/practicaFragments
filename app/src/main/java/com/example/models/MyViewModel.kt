@@ -4,9 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class UserViewModel: ViewModel(){
+class MyViewModel : ViewModel() {
     val userName: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
+    }
+
+    init {
+        userName.value = "Juan"
     }
 
     fun getUserName(): LiveData<String>{
