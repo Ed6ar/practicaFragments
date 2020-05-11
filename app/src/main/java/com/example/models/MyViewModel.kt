@@ -6,11 +6,7 @@ import androidx.lifecycle.ViewModel
 
 class MyViewModel : ViewModel() {
     val userName: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-
-    init {
-        userName.value = "Juan"
+        MutableLiveData<String>("Juan")
     }
 
     fun getUserName(): LiveData<String>{
